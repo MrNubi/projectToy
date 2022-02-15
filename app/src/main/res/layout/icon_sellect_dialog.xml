@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@drawable/background_radius"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center">
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:text="Icon Sellect"
+                android:textSize="60dp"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/background_radius_yellow"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+            <ImageView
+                android:id="@+id/icon_1"
+                android:src="@drawable/splash_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_2"
+            android:src="@drawable/main_icon_economy"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_3"
+            android:src="@drawable/upperbg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_4"
+            android:src="@drawable/main_menu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_5"
+            android:src="@drawable/plusbtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/background_radius_yellow"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/icon_6"
+            android:src="@drawable/lucky"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_7"
+            android:src="@drawable/main_icon_all"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_8"
+            android:src="@drawable/main_icon_cook"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_9"
+            android:src="@drawable/main_icon_hobby"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+        <ImageView
+            android:id="@+id/icon_10"
+            android:src="@drawable/main_icon_else"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageView>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+    </HorizontalScrollView>
+
+
+
+</LinearLayout>
+
+</layout>
