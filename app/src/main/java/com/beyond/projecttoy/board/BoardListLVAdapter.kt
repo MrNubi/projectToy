@@ -41,7 +41,6 @@ class BoardListLVAdapter(val boardList : MutableList<BoardModel>) : BaseAdapter(
         val title = view?.findViewById<TextView>(R.id.titleArea)
         val content = view?.findViewById<TextView>(R.id.contentArea)
         val time = view?.findViewById<TextView>(R.id.timeArea)
-        val img = view?.findViewById<ImageView>(R.id.BEArea123)
 
 
 
@@ -53,6 +52,7 @@ class BoardListLVAdapter(val boardList : MutableList<BoardModel>) : BaseAdapter(
         title!!.text = boardList[position].title
         content!!.text = boardList[position].content
         time!!.text = boardList[position].time
+
 
 
 

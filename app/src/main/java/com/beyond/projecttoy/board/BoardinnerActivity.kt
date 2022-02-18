@@ -1,17 +1,16 @@
 package com.beyond.projecttoy.board
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import com.beyond.projecttoy.LvModel
 
 import com.beyond.projecttoy.R
 import com.beyond.projecttoy.comment.CommentLVAdapter
@@ -45,7 +44,11 @@ class BoardinnerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_boardinner)
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_boardinner)
 
@@ -55,7 +58,6 @@ class BoardinnerActivity : AppCompatActivity() {
             showDialog()
         }
 
-        // 두번째 방법
         key = intent.getStringExtra("key").toString()
         getBoardData(key)
         getImageData(key)
@@ -74,11 +76,11 @@ class BoardinnerActivity : AppCompatActivity() {
 
 
             val intent = Intent(this, Board_Re_Reply_Activity::class.java)
-            intent.putExtra("title123", commentDataList[position].commentTitle.toString())
-            intent.putExtra("time123", commentDataList[position].commentCreatedTime.toString())
+            intent.putExtra("Commenttitle", commentDataList[position].commentTitle.toString())
+            intent.putExtra("Commenttime", commentDataList[position].commentCreatedTime.toString())
             intent.putExtra("key",key)
 
-            Log.d("슈팅퀘이샤", commentDataList[position].toString())
+            Log.d("ToReRepltBoard", commentDataList[position].toString())
             startActivity(intent)
 
         }
@@ -104,7 +106,6 @@ class BoardinnerActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
@@ -114,12 +115,7 @@ class BoardinnerActivity : AppCompatActivity() {
     }
 
     fun insertComment(key : String){
-        // comment
-        //   - BoardKey
-        //        - CommentKey
-        //            - CommentData
-        //            - CommentData
-        //            - CommentData
+
         FBRef.commentRef
             .child(key)
             .push()

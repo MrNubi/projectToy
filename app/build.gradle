@@ -41,6 +41,10 @@ apply plugin: 'com.google.gms.google-services'
 
 
 dependencies {
+    // FirebaseUI Storage only
+    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
+}
+dependencies {
 
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation platform('com.google.firebase:firebase-bom:29.0.4')

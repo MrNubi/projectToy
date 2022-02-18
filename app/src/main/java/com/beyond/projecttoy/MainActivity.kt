@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.beyond.projecttoy.board.BoardActivity
@@ -16,19 +17,30 @@ import com.beyond.projecttoy.util.FBA
 import com.beyond.projecttoy.util.FBRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import splitties.activities.start
 
 class MainActivity : AppCompatActivity() {
 
+    private var database = Firebase.database
+
+     var GS = ""
+
+
     private var UID = ""
 
-    private var nigimi = ""
+    var nigimi = ""
 
     private lateinit var binding: ActivityMainBinding
     private val LvDataList = mutableListOf<LvModel>()
     private val LvKeyList = mutableListOf<String>()
     private lateinit var LVadapter : MainLVadapter
+    val storageRef = FirebaseStorage.getInstance().reference
 
 
 
@@ -36,7 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+             setContentView(R.layout.activity_main)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -60,29 +74,60 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
         getFBBoardData()
+
+
+
+    var    myRefNick = FBRef.proNickRef.child("${FBA.getUid()}")
+
+        myRefNick.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.getValue()
+                Log.d(TAG, "Value is: $value")
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+
+
+
+        })
+
+
+
 
 
 
 
         findViewById<ImageView>(R.id.settingBtn).setOnClickListener {
 
-            FBRef.iconRef.get().addOnSuccessListener {
+            FBRef.iconRef.child("${FBA.getUid()}").get().addOnSuccessListener {
                 Log.i("햝", "Got value ${it.value}")
                var iconCode = it.value.toString()
                 nigimi = iconCode
-                Log.d("록귀", iconCode)
+                UID = FBA.getUid()
+                Log.d("록귀", nigimi)
+                val intent = Intent(this, SettingActivity::class.java)
+                intent.putExtra("key",UID)
+                intent.putExtra("k",nigimi)
+                startActivity(intent)
+
+
+
 
             }.addOnFailureListener{
                 Log.e("firebase", "Error getting data", it)
             }
 
 
-            UID = FBA.getUid()
-            val intent = Intent(this, SettingActivity::class.java)
-            intent.putExtra("key",UID)
-            intent.putExtra("k",nigimi)
-            startActivity(intent)
+
         }
 
 
@@ -124,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                 LvDataList.reverse()
 
                 LVadapter.notifyDataSetChanged()
-                Log.d(TAG, LvDataList.toString())
+                Log.d("곽", LvDataList.toString())
 
 
 
@@ -137,6 +182,8 @@ class MainActivity : AppCompatActivity() {
         FBRef.boardRef.addValueEventListener(postListener)
 
     }
+
+
 
 
 

@@ -7,6 +7,7 @@
         <entry key="..\:/New/projectToy/app/src/main/res/drawable/background.xml" value="0.23055555555555557" />
         <entry key="..\:/New/projectToy/app/src/main/res/drawable/background_radius.xml" value="0.15729166666666666" />
         <entry key="..\:/New/projectToy/app/src/main/res/drawable/background_radius_yellow.xml" value="0.19739583333333333" />
+        <entry key="..\:/New/projectToy/app/src/main/res/drawable/edit_dialog.xml" value="0.14114583333333333" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/activity_board.xml" value="0.2708333333333333" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/activity_board_edit.xml" value="0.27395833333333336" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/activity_board_re_reply.xml" value="0.1" />
@@ -21,6 +22,7 @@
         <entry key="..\:/New/projectToy/app/src/main/res/layout/board_list_item.xml" value="0.1" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/comment_list_item.xml" value="0.1384083044982699" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/custom_dialog.xml" value="0.27395833333333336" />
+        <entry key="..\:/New/projectToy/app/src/main/res/layout/edit_dialog.xml" value="0.125" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/icon_sellect_dialog.xml" value="0.13385416666666666" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/main_lv_item.xml" value="0.12314814814814815" />
         <entry key="..\:/New/projectToy/app/src/main/res/layout/setting_item.xml" value="0.16458333333333333" />

@@ -24,6 +24,8 @@ class BoardEditActivity : AppCompatActivity() {
     private lateinit var key:String
 
     private lateinit var binding : ActivityBoardEditBinding
+    var storage = Firebase.storage
+    val storageRef = storage.reference
 
     private val TAG = BoardEditActivity::class.java.simpleName
 
@@ -48,6 +50,8 @@ class BoardEditActivity : AppCompatActivity() {
     }
 
     private fun editBoardData(key : String){
+
+       var k = storageRef.child("${FBA.getUid()}.png").downloadUrl
 
         FBRef.boardRef
             .child(key)

@@ -11,7 +11,9 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -69,6 +71,9 @@ class SettingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_setting)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
@@ -91,7 +96,9 @@ class SettingActivity : AppCompatActivity() {
 
 
         var key = intent.getStringExtra("key")
+        var icon_code = intent.getStringExtra("k")
         Log.d("여기","$key")
+        Log.d("여기","$icon_code")
 
 
 
@@ -141,7 +148,67 @@ class SettingActivity : AppCompatActivity() {
 
 
 
+        binding.textView2.setOnClickListener {
 
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.edit_dialog, null)
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+
+
+            val mAlterDialog = mBuilder.show()
+
+            mAlterDialog.findViewById<Button>(R.id.EDT_PUSH_BUTTON)!!.setOnClickListener{
+
+                val key = intent.getStringExtra("key")
+
+
+                val TT = mAlterDialog.findViewById<EditText>(R.id.EDT_editDialog)!!.text.toString()
+
+                val database = Firebase.database
+                val myRef = database.getReference("Nickname")
+
+                myRef.child("$key").setValue("$TT")
+
+
+
+               binding.textView2.setText(TT)
+                mAlterDialog.dismiss()
+
+            }
+
+
+
+        }
+
+        binding.TXTOneLine.setOnClickListener {
+
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.edit_dialog, null)
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+
+
+            val mAlterDialog = mBuilder.show()
+
+            mAlterDialog.findViewById<Button>(R.id.EDT_PUSH_BUTTON)!!.setOnClickListener{
+
+                val key = intent.getStringExtra("key")
+                val TT = mAlterDialog.findViewById<EditText>(R.id.EDT_editDialog)!!.text.toString()
+
+                val database = Firebase.database
+                val myRef = database.getReference("TXTOneLine")
+
+                myRef.child("$key").setValue("$TT")
+
+
+
+                binding.TXTOneLine.setText(TT)
+                mAlterDialog.dismiss()
+
+            }
+
+
+
+        }
 
         val ICdialog = findViewById<ImageView>(R.id.Icon_choice_btn)
         ICdialog.setOnClickListener {
@@ -161,6 +228,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("10")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_icon_else).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -172,6 +242,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("9")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_icon_hobby).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -183,6 +256,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("8")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_icon_cook).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -195,6 +271,10 @@ class SettingActivity : AppCompatActivity() {
 
                 myRef.child("$key").setValue("7")
 
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_icon_all).into(kiti)
+                mAlterDialog.dismiss()
+
 
             }
             mAlterDialog.findViewById<ImageView>(R.id.icon_6)!!.setOnClickListener {
@@ -205,6 +285,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("6")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.lucky).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -216,6 +299,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("5")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.plusbtn).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -227,6 +313,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("4")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_menu).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -238,6 +327,9 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("3")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.upperbg).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
@@ -249,20 +341,33 @@ class SettingActivity : AppCompatActivity() {
                 val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("2")
+                var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.main_icon_economy).into(kiti)
+                mAlterDialog.dismiss()
 
 
             }
             mAlterDialog.findViewById<ImageView>(R.id.icon_1)!!.setOnClickListener {
                 val key = intent.getStringExtra("key")
 
-                val database = Firebase.database
+
+                    val database = Firebase.database
                 val myRef = database.getReference("icon")
-                val model = DialogDataModel("10","$key")
 
                 myRef.child("$key").setValue("1")
 
 
+
+               var kiti=findViewById<ImageView>(R.id.Icon_show_btn)
+                Glide.with(this).load(R.drawable.splash_img).into(kiti)
+                mAlterDialog.dismiss()
+                Log.d("캉","캉")
+
+
+
             }
+
+
 
         }
 
@@ -319,8 +424,12 @@ class SettingActivity : AppCompatActivity() {
 
         val storageRef = storage.reference
 
+
+
 // Create a reference to "mountains.jpg"
-        val mountainsRef = storageRef.child(key +"profile.png")
+        val mountainsRef = storageRef.child("profile").child(key)
+
+
 
         val imageView = binding.profileImg
         imageView.isDrawingCacheEnabled = true
@@ -422,7 +531,7 @@ class SettingActivity : AppCompatActivity() {
     private fun getImageData(key : String){
 
         // Reference to an image file in Cloud Storage
-        val storageReference = Firebase.storage.reference.child(key +"profile.png")
+        val storageReference = Firebase.storage.reference.child("profile").child(key)
 
 
         // ImageView in your Activity

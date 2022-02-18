@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -18,6 +19,7 @@ import com.beyond.projecttoy.util.FBA
 import com.beyond.projecttoy.util.FBRef
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 
@@ -30,6 +32,9 @@ class BoardActivity : AppCompatActivity() {
 
 
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_board)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board)
@@ -46,14 +51,17 @@ class BoardActivity : AppCompatActivity() {
 
             val key = FBRef.boardRef.push().key.toString()
 
+            val A = FBRef.storageRef.child("${key}.png").downloadUrl
+
+
+
 
 
 
 
             FBRef.boardRef
                 .child(key)
-//              .push()
-                .setValue(LvModel(title, content, uid, time))
+                .setValue(LvModel(title, content, uid, time,))
 
 
 
@@ -107,8 +115,8 @@ class BoardActivity : AppCompatActivity() {
 
         val storageRef = storage.reference
 
-// Create a reference to "mountains.jpg"
         val mountainsRef = storageRef.child(key +".png")
+        val mountainsRef2 = Firebase.storage.reference.child("main").child(key)
 
         val imageView = binding.BEI1
         imageView.isDrawingCacheEnabled = true
@@ -119,6 +127,13 @@ class BoardActivity : AppCompatActivity() {
         val data = baos.toByteArray()
 
         var uploadTask = mountainsRef.putBytes(data)//<- 경로설정
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+        }
+        var uploadTask2 = mountainsRef2.putBytes(data)//<- 경로설정
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
