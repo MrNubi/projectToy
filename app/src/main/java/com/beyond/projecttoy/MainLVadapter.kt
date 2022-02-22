@@ -1,6 +1,9 @@
 package com.beyond.projecttoy
 
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.beyond.projecttoy.setting.SettingActivity
 import com.beyond.projecttoy.util.FBA
@@ -15,11 +19,15 @@ import com.beyond.projecttoy.util.FBRef
 import com.beyond.projecttoy.util.FBRef.Companion.storage
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 class MainLVadapter(val Lvlist : MutableList<LvModel>) : BaseAdapter() {
+
     override fun getCount(): Int {
         return Lvlist.size
     }
@@ -46,6 +54,7 @@ class MainLVadapter(val Lvlist : MutableList<LvModel>) : BaseAdapter() {
 
         }
 
+
         val content = view?.findViewById<TextView>(R.id.listViewContentArea)
         val time = view?.findViewById<TextView>(R.id.listViewTimeArea)
         val title = view?.findViewById<TextView>(R.id.listViewTitleArea)
@@ -67,29 +76,60 @@ class MainLVadapter(val Lvlist : MutableList<LvModel>) : BaseAdapter() {
 
 
 
-        FBRef.boardRef.get().addOnSuccessListener {
-            Log.i("햝", "Got value ${it.key.toString()}")
-            var YT = p0*6
-            val R : String = it.value.toString().split(",")[YT]
 
-//            var YU = it.value.toString().split(",")
+        title.setOnClickListener {
+        Log.d("걍","$time")
+                }
+
+
+//0,13,26
+        FBRef.boardRef.get().addOnSuccessListener {
+            Log.i("햝", "Got value ${it.value.toString()}")
+
+            var TK = it.value.toString()
+            var enum = p0*13
+            var YY = ArrayList<String>()
+            var T = Lvlist.size - 1
+
+
+    
+//            var TK2=TK.replace("{", "").replace("}", "").replace("=","")
+//            var TK2=TK.replace("{", "").replace("}", "").replace("=","")
+//            Log.i("햝_TK", "${TK}")
+//            Log.i("햝_TK2", "${TK2}")
+
+
+//            var YT = if(p0 == 0) p0 else p0*2-1
+//            val R : String = TK2.toString().split(",")[YT]
+//            Log.i("햝_TK3", "${R}")
+//
+//            var YU = TK2.toString().split(",")
 //            var YY = YU[p0*6].split("=")[0]
+
+//            var TK3= mutableListOf<String>()
+//            for (molamola in TK){
+//
+//                TK3.add("$YY")
+//                Log.d("햝10", "$YY")
+//
+//            }
 //
 //
 //
 //
 //            Log.i("햝", "${R.toString()}")
 //            Log.i("햝2", "${YY}")
-//
-//
-//            val key = FBRef.boardRef.push().key.toString()
-//            Log.d("캬옹_key", key)
+
+
+
+
 
 
             val storage = Firebase.storage
 
 
-            val storageReference = Firebase.storage.reference.child("-Mw2cpSDse1awCIS3ha8.png")
+            val storageReference = Firebase.storage.reference.child(Lvlist[p0].key+".png")
+            Log.d("햝_KEY", Lvlist[p0].key+".png")
 
             Log.d("캬옹", p0.toString())
 
@@ -126,4 +166,6 @@ class MainLVadapter(val Lvlist : MutableList<LvModel>) : BaseAdapter() {
 
 
     }
+
+
 }

@@ -7,7 +7,8 @@ data class LvModel(
     val uid: String = "",
     val time: String = "",
     val img : Int = R.drawable.plusbtn,
-    val url : Any = ""
+    val url : Any = "",
+    val key : String = ""
 
 
 )

@@ -39,6 +39,8 @@ class splash : AppCompatActivity() {
 
 
 
+
+
         if(auth.currentUser?.uid == null) {
             Log.d("SplashActivity", "null")
 
@@ -58,4 +60,6 @@ class splash : AppCompatActivity() {
 
 
     }
+
+
 }

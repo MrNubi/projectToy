@@ -61,7 +61,7 @@ class BoardActivity : AppCompatActivity() {
 
             FBRef.boardRef
                 .child(key)
-                .setValue(LvModel(title, content, uid, time,))
+                .setValue(LvModel(title, content, uid, time,img = R.drawable.order_login_img,"1",key))
 
 
 
